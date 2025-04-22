@@ -35,8 +35,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
-    "esbuild": "^0.20.2",
+    "compare-versions": "^6.1.1",
     "electron": "^29.3.0",
+    "esbuild": "^0.20.2",
     "nuxt": "^3.11.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.8",

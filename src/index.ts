@@ -1,5 +1,6 @@
 import { type AddressInfo } from 'net'
 import { defineNuxtModule } from '@nuxt/kit'
+import { compare } from 'compare-versions'
 import type {
   ResolvedConfig,
   ViteDevServer,
@@ -170,10 +171,12 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
 
     // Fix path to make it works with Electron protocol `file://`
     nuxt.options.app.baseURL = './' // '/'
-    nuxt.options.app.buildAssetsDir = '/' // '/_nuxt/' - #16
+    if(compare(nuxt._version, '3.16.2', '<'))
+      nuxt.options.app.buildAssetsDir = "/"; // '/_nuxt/' - #16
 
     nuxt.options.runtimeConfig.app.baseURL = './' // '/'
-    nuxt.options.runtimeConfig.app.buildAssetsDir = '/' // '/_nuxt/'
+    if(compare(nuxt._version, '3.16.2', '<'))
+      nuxt.options.runtimeConfig.app.buildAssetsDir = '/' // '/_nuxt/'
     nuxt.options.router.options.hashMode = true // Avoid 404 errors
 
     // Only apply on build
